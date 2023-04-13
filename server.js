@@ -55,9 +55,10 @@ app.post("/login", async (req, res) => {
   if (userExist[0]) {
     res.send(userExist);
   } 
-  // else {
-  //   res.send("user does not exist");
-  // }
+  else {
+    // res.send("user does not exist");
+    throw 'user does not exist';
+  }
 });
 
 app.post("/signup", async (req, res) => {
@@ -73,9 +74,10 @@ app.post("/signup", async (req, res) => {
         res.send(err);
       });
   } 
-  // else {
+  else {
   //   res.send("user already exists");
-  // }
+  throw 'user already exists'
+  }
 });
 
 server.listen(PORT, () => {
