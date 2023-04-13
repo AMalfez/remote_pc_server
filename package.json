@@ -1,9 +1,26 @@
 {
-  "scripts": {
-    "start": "node app.js"
-  },
   "dependencies": {
-    "child-process": "^1.0.2",
-    "express": "^4.18.2"
-  }
+    "axios": "^1.3.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "socket.io": "^4.6.1"
+  },
+  "name": "techshilla",
+  "version": "1.0.0",
+  "main": "electron-express.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMalfez/remote_PC_control.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AMalfez/remote_PC_control/issues"
+  },
+  "homepage": "https://github.com/AMalfez/remote_PC_control#readme",
+  "description": ""
 }
