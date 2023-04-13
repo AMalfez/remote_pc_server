@@ -56,8 +56,8 @@ app.post("/login", async (req, res) => {
     res.send(userExist);
   } 
   else {
-    // res.send("user does not exist");
-    throw 'user does not exist';
+    res.send("user does not exist");
+    // throw 'user does not exist';
   }
 });
 
@@ -75,8 +75,8 @@ app.post("/signup", async (req, res) => {
       });
   } 
   else {
-  //   res.send("user already exists");
-  throw 'user already exists'
+    res.send("user already exists");
+  // throw 'user already exists'
   }
 });
 
