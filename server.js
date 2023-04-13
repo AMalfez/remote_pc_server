@@ -50,13 +50,14 @@ app.post("/shutdown", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const { username } = req.body;
-  const userExist = await userModel.find({ username });
+  const { username, password } = req.body;
+  const userExist = await userModel.find({ username, password });
   if (userExist[0]) {
     res.send(userExist);
-  } else {
-    res.send("user does not exist");
-  }
+  } 
+  // else {
+  //   res.send("user does not exist");
+  // }
 });
 
 app.post("/signup", async (req, res) => {
@@ -71,9 +72,10 @@ app.post("/signup", async (req, res) => {
       .catch((err) => {
         res.send(err);
       });
-  } else {
-    res.send("user already exists");
-  }
+  } 
+  // else {
+  //   res.send("user already exists");
+  // }
 });
 
 server.listen(PORT, () => {
