@@ -26,6 +26,18 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
+app.post('/editcode',async(req,res)=>{
+  const {username,access_code} = req.body;
+  const userExist = await userModel.find({username});
+  if(userExist){
+    const update = await userModel.findOneAndUpdate({username},{...userExist,access_code})
+    res.send(update) ;
+  }else{
+    res.send('error occured')
+  }
+
+})
+
 app.post("/shutdown", (req, res) => {
   // Parse the incoming request body
   const access_code = req.query.access_code;
