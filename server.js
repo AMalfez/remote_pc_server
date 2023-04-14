@@ -29,10 +29,10 @@ app.get("/", (req, res) => {
 app.post("/shutdown", (req, res) => {
   // Parse the incoming request body
   const access_code = req.query.access_code;
-
-  req.on("end", () => {
+  const command = req.query.command;
+  // req.on("end", () => {
     if (access_code === access) {
-      const command = req.query.command;
+      
       // Broadcast the incoming request data to all connected Electron.js clients
       io.emit("remote", command);
 
@@ -47,7 +47,7 @@ app.post("/shutdown", (req, res) => {
       res.status(200).send("wrong code");
     }
   });
-});
+// });
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
