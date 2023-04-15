@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
-const access = "AM";
+// const access = "AM";
 const socketIO = require("socket.io");
 const http = require("http");
 const server = http.createServer(app);
@@ -42,22 +42,23 @@ app.post("/shutdown", (req, res) => {
   // Parse the incoming request body
   const access_code = req.query.access_code;
   const command = req.query.command;
+  const username = req.query.username;
   // req.on("end", () => {
-    if (access_code === access) {
+    // if (access_code === access) {
       
       // Broadcast the incoming request data to all connected Electron.js clients
-      io.emit("remote", command);
+      io.emit("remote", [username,access_code,command]);
 
       // Send a response to the incoming request
       res.status(200).send("Control message sent");
-    } else {
-      const command = "wrong_code";
-      // Broadcast the incoming request data to all connected Electron.js clients
-      io.emit("remote", command);
+    // } else {
+    //   const command = "wrong_code";
+    //   // Broadcast the incoming request data to all connected Electron.js clients
+    //   io.emit("remote", command);
 
-      // Send a response to the incoming request
-      res.status(200).send("wrong code");
-    }
+    //   // Send a response to the incoming request
+    //   res.status(200).send("wrong code");
+    // }
   });
 // });
 
@@ -74,11 +75,11 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, access_code } = req.body;
   const userExist = await userModel.find({ username });
   if (!userExist[0]) {
     await userModel
-      .create({ username, email, password })
+      .create({ username, email, password, access_code })
       .then((data) => {
         res.send(data);
       })
